@@ -1,2 +1,2 @@
 # Money and Banking Analysis
-Data Analysis to Demonstrate Macroeconomic Theories for Money &amp; Banking
+## This is a project that proves and visualizes macroeconomic theories for Money &amp; Banking
