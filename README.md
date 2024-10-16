@@ -20,7 +20,7 @@ This EDA seeks to show key economic concepts using real life data, such as:
 - Does printing money leads to larger inflation? ("Inflation is always and everywhere a monetary phenomenon." (Milton Friedman, 1970))
 
 ### Data Sources
-This analysis will be using monthly data publicly available at [FRED] (https://fred.stlouisfed.org/). All data used is available in [Raw Folder(https://github.com/kshao19/Money_and_Banking_Analysis/tree/main/Raw%20Data) in this repository but is last downloaded in 2021. 
+This analysis will be using monthly data publicly available at [FRED](https://fred.stlouisfed.org). All data used is available in [Raw Folder](https://github.com/kshao19/Money_and_Banking_Analysis/tree/main/Raw%20Data/) in this repository but is last downloaded in 2021. 
 - Real and Nominal GDP
 - CPI
 - PPI
