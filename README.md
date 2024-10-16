@@ -20,8 +20,18 @@ This EDA seeks to show key economic concepts using real life data, such as:
 - Does printing money leads to larger inflation? ("Inflation is always and everywhere a monetary phenomenon." (Milton Friedman, 1970))
 
 ### Data Sources
-The data provided for this analysis is publicly available at 
+This analysis will be using monthly data publicly available at [FRED] (https://fred.stlouisfed.org/)
+- Real and Nominal GDP
+- CPI
+- PPI
+- PCE
+- Money Supply M1
+- Money Supply M2
 
 ### Data Analysis
+**1. What is the relationship between real and nominal GDP**
+
+
+
 
 ### Results/Findings
