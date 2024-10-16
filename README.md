@@ -20,7 +20,7 @@ This EDA seeks to show key economic concepts using real life data, such as:
 - Does printing money leads to larger inflation? ("Inflation is always and everywhere a monetary phenomenon." (Milton Friedman, 1970))
 
 ### Data Sources
-The data is public
+The data provided for this analysis is publicly available at 
 
 ### Data Analysis
 
