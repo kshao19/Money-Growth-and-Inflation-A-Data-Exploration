@@ -1,0 +1,11 @@
+# Import Python Packages
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Run the code below to set up for google colab 
+# from google.colab import drive
+# drive.mount('/content/drive') 
+
+# set up data path 
+data_path = '[Input your path here]'
