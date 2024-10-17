@@ -7,5 +7,33 @@ import numpy as np
 # from google.colab import drive
 # drive.mount('/content/drive') 
 
-# set up data path 
+# set up data path and import
 data_path = '[Input your path here]'
+gdp_df = pd.read_csv(data_path+ '/Raw Data/Nominal:Real GDP.csv').rename(columns={'DATE':'date','GDP':'gdp_nom','GDPC1':'gdp_real'},inplace=True)
+gdp_df.set_index('date',inplace=True)
+
+# Calculate Year to Year GDP Growth Rate for each quarter
+# find the Year to Year GDP difference by quarter
+diff_df= gdp_df.diff(periods=4)
+# shift the GDP value in the previous quarter to serve as the denominator
+shift_df=gdp_df.shift(periods=4)
+# calculate the % change
+gdp_growth_df = ((diff_df / shift_df)*100)
+gdp_growth_df.reset_index(inplace=True)
+
+# Visualize the GDP growth rate
+date_filter = (gdp_growth_df['date']<'2021-01-01')&(gdp_growth_df ['date']>='1980-01-01')
+gdp_growth_filtered_df = gdp_growth_df [date_filter]
+x_gdp = gdp_growth_filtered_df['date']
+y_gdp_nom = gdp_growth_filtered_df['gdp_nom']
+y_gdp_real = gdp_growth_filtered_df['gdp_real']
+plt.figure(figsize=(10,5))
+plt.plot(x_gdp, y_gdp_nom, label='nominal gdp growth')
+plt.plot(x_gdp, y_gdp_real, label='real gdp growth')
+plt.xticks(ticks = (np.arange(0,161,20)), rotation = 45)
+plt.xlabel('DATE(quarters)',fontsize=12)
+plt.ylabel('gdp growth',fontsize=12)
+plt.title('Nominal GDP Growth Rate versus Real GDP Growth Rate')
+plt.legend()
+plt.grid('on')
+plt.show()
