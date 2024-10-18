@@ -38,6 +38,21 @@ plt.legend()
 plt.grid('on')
 plt.show()
 
+# Calculate GDP Deflator
+gdp_df['GDP_deflator']=gdp_df['gdp_nom'].div(gdp_df['gdp_real'].values)*100 
+gdp_df.reset_index(inplace=True)
+date_filter_deflator = (gdp_df['date']<='2020-10-01')&(gdp_df ['date']>='1980-01-01')
+gdp_filtered_df = gdp_df [date_filter_deflator]
 
-
-
+# Plot the GDP Deflator
+x_gdp_deflator = gdp_filtered_df['date']
+y_gdp_deflator = gdp_filtered_df['GDP_deflator']
+plt.figure(figsize=(10,5))
+plt.plot(x_gdp_deflator, y_gdp_deflator, label='GDP deflator')
+plt.xlabel('DATE(quarters)',fontsize=12)
+plt.ylabel('GDP Deflator',fontsize=12)
+plt.title('GDP deflator')
+plt.xticks(ticks = (np.arange(0,161,20)), rotation = 45)
+plt.legend()
+plt.grid('on')
+plt.show()
