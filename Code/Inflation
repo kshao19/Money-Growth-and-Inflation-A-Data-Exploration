@@ -1,0 +1,39 @@
+# Import Python Packages
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Run the code below to set up for google colab 
+# from google.colab import drive
+# drive.mount('/content/drive') 
+
+# set up data path and import
+data_path = '[Input your path here]'
+price_df = pd.read_csv(data_path +'part2.csv', usecols=['DATE','PPIACO_NBD19820101','CPIAUCSL_NBD19820101','PCE_NBD19820101'], na_values='.')
+price_df.rename(columns={'DATE':'date','PPIACO_NBD19820101':'ppi','CPIAUCSL_NBD19820101':'cpi','PCE_NBD19820101':'pce'},inplace=True)
+price_df.set_index('date',inplace=True)
+
+# Calculate Year to Year Inflation for PPI, CPI, and PCE
+diff_df= price_df.diff(periods=12)
+shift_df = price_df.shift(periods=12)
+inflation_df = (diff_df/shift_df)*100
+inflation_df.reset_index(inplace=True)
+date_filter = (inflation_df['date']<='2020-12-01')&(inflation_df ['date']>='1980-01-01')
+inflation_filtered_df = inflation_df [date_filter]
+
+# Plotting
+x = inflation_filtered_df['date']
+y_ppi = inflation_filtered_df['ppi']
+y_cpi = inflation_filtered_df['cpi']
+y_pce = inflation_filtered_df['pce']
+plt.figure(figsize=(10,5))
+plt.plot(x, y_ppi, label='Inflation_PPI')
+plt.plot(x, y_cpi, label='Inflation_CPI')
+plt.plot(x, y_pce, label='Inflation_PCE')
+plt.title("Inflation")
+plt.xlabel('DATE',fontsize=12)
+plt.ylabel('Inflation',fontsize=12)
+plt.xticks(ticks = (np.arange(0,492,60)), rotation = 45, fontsize=8)
+plt.grid('on')
+plt.legend()
+plt.show()
