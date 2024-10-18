@@ -1,0 +1,45 @@
+# Import Python Packages
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Run the code below to set up for google colab 
+# from google.colab import drive
+# drive.mount('/content/drive') 
+data_path = '[Input your path here]'
+
+# Calculate inflation as measured by CPI. This calculation is also performed in code "Money_and_Banking_Analysis/new/main/Code/Inflation".
+price_df = pd.read_csv(data_path +'part2.csv', usecols=['DATE','PPIACO_NBD19820101','CPIAUCSL_NBD19820101','PCE_NBD19820101'], na_values='.')
+price_df.rename(columns={'DATE':'date','PPIACO_NBD19820101':'ppi','CPIAUCSL_NBD19820101':'cpi','PCE_NBD19820101':'pce'},inplace=True)
+price_df.set_index('date',inplace=True)
+diff_df= price_df.diff(periods=12)
+shift_df = price_df.shift(periods=12)
+inflation_df = (diff_df/shift_df)*100
+inflation_df.reset_index(inplace=True)
+
+# Calculate money growth
+money_df = pd.read_csv(data_path +'Money Stock.csv', na_values='.')
+money_df.rename(columns={'DATE':'date','M1SL':'M1','M2SL':'M2'},inplace=True)
+money_df.set_index('date',inplace=True)
+diff_money_df= money_df.diff(periods=12)
+shift_money_df = money_df.shift(periods=12)
+money_growth_df = (diff_money_df/shift_money_df)*100
+money_growth_df.reset_index(inplace=True)
+
+# Concatenate the inflation and money growth data
+inflation_money_df=pd.merge(money_growth_df,inflation_df[['date','cpi']],on='date',how='right')
+date_filter = (inflation_money_df['date']<='2020-12-01')&(inflation_money_df ['date']>='1960-01-01')
+inflation_money_filtered_df = inflation_money_df [date_filter]
+
+# Plotting the data series in 3 sub-periods: 1960-1980, 1980-1990, and 1990-2020
+date_filter1 = (inflation_money_df['date']<='1980-12-01')&(inflation_money_df ['date']>='1960-01-01')
+inflation_money_filtered_1_df = inflation_money_df [date_filter1]
+date_filter2 = (inflation_money_df['date']<='1990-12-01')&(inflation_money_df ['date']>='1981-01-01')
+inflation_money_filtered_2_df = inflation_money_df [date_filter2]
+inflation_money_filtered_1_df.plot(x='date')
+inflation_money_filtered_2_df.plot(x='date')
+plt.xticks(rotation=45)
+date_filter3 = (inflation_money_df['date']<='2020-01-01')&(inflation_money_df ['date']>='1991-01-01')
+inflation_money_filtered_3_df = inflation_money_df [date_filter4]
+inflation_money_filtered_3_df.plot(x='date')
+plt.xticks(rotation=45)
