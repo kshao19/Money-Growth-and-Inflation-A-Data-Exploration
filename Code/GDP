@@ -9,7 +9,8 @@ import numpy as np
 
 # set up data path and import
 data_path = '[Input your path here]'
-gdp_df = pd.read_csv(data_path+ '/Raw Data/Nominal:Real GDP.csv').rename(columns={'DATE':'date','GDP':'gdp_nom','GDPC1':'gdp_real'},inplace=True)
+gdp_df = pd.read_csv(data_path+ '/Raw Data/Nominal:Real GDP.csv')
+gdp_df.rename(columns={'DATE':'date','GDP':'gdp_nom','GDPC1':'gdp_real'},inplace=True)
 gdp_df.set_index('date',inplace=True)
 
 # Calculate Year to Year GDP Growth Rate for each quarter
