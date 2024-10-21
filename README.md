@@ -63,7 +63,7 @@ During the COVID 19, due to decreasing consumer demand and physical limitations 
 
 #### 3. Inflation and Money Growth
 
-Milton Friedman once wrote that "Inflation is always and everywhere a monetary phenomenon."  This analysis seeks to compare inflation (as measured by CPI) and growth rate in M1 and M2 money supply. M1 money supply consists of physical currency and coin, demand deposits, traveler's checks, and other checkable deposits. M2 money supply consists of all components of M1 plus several less-liquid assets such as savings deposit. 
+Milton Friedman once wrote that "Inflation is always and everywhere a monetary phenomenon."  This analysis seeks to compare inflation (as measured by CPI) and growth rate in M1 and M2 money supply. M1 money supply consists of physical currency and coin, demand deposits, traveler's checks, and other checkable deposits. M2 money supply consists of all components of M1 plus several less-liquid assets such as savings deposit. Code to reproduce the analysis is available [here](https://github.com/kshao19/Money_and_Banking_Analysis/blob/main/Code/Money%20Growth).
 
 The chart plots the year-to-yeare inflation and money growth from 1960 to 2020. Inflation is calculated using the same methodology as #2. Money growth is calculated as $100*\frac{M_{t} - M_{t-1}}{M_{t-1}}$.
 
@@ -79,7 +79,7 @@ From the plotting, it is difficult to conclude whether inflation will always fol
 
 #### 4. Examine Portfolio Choice Theory
 
-This analysis uses the 2019 result of Survey of Consumer Finance (SCF) which records data on U.S. household balance sheets, pensions, income, and demographic characteristics. 
+This analysis uses the 2019 result of Survey of Consumer Finance (SCF) which records data on U.S. household balance sheets, pensions, income, and demographic characteristics. Code to reproduce the analysis is available [here](https://github.com/kshao19/Money_and_Banking_Analysis/blob/main/Code/Portfolio%20Choice%20Theory).
 
 Portfolio Choice Theory assumes that as wealth increases, investors have more resources to purchase assets, therefore, their demand for money increases. In addition, the more income household have, Portfolio Choice Theory assumes that their ability to hold a variaty of assets increases, including their ability to hold money, given a cateris paribus assumption to accumulate wealth. The left chart shows the relationship between asset and avergae liquid holding by income decile groups. The right chart shows the relationship between income and avergae liquid holding by asset decile groups.
 
