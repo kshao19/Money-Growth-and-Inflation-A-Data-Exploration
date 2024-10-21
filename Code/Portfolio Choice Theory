@@ -1,0 +1,115 @@
+# Import Python Packages
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Run the code below to set up for google colab 
+# from google.colab import drive
+# drive.mount('/content/drive') 
+
+# Set up data path and import
+data_path = '[Input your path here]'
+# First unzip the data in "/Raw Data/sub-data.zip"
+SCF_df = pd.read_csv(data_path +'sub-data.txt')
+
+# Limiting the data to Implicate Number 5. Different values of the implicate number in the SCF data refers to the different replicated versions of the missing data. This multiple imputation procedure is used to approximate the distribution of the missing data. 
+# Imputation can reduce bias or improve the representativeness of the results upon the missing data. The more times the data is imputed, the estimates get more precise, meaning they have smaller standard errors.
+SCF_df['Implicate']=SCF_df['Y1'].mod(10)
+data_df = SCF_df[SCF_df['Implicate']==5]
+
+# Compute the weighted income distributions
+y_df = data_df.groupby(['INCOME']).sum().filter(['INCOME','WGT'])
+y_df['FRAC']= (y_df['WGT']/y_df['WGT'].sum())*100
+y_df.reset_index(inplace=True)
+
+# Compute the weighted wealth distributions
+data_df.groupby(['ASSET']).sum()
+w_df = data_df.groupby(['ASSET']).sum().filter(['ASSET','WGT'])
+w_df['FRAC']= (w_df['WGT']/w_df['WGT'].sum())*100
+w_df.reset_index(inplace=True)
+
+# Compute deciles for 2019 US household income and wealth. A decile is any of the nine values that divide the sorted data into ten equal parts, so that each part represents 1/10 of the sample or population.
+y_df=y_df.sort_values('INCOME', axis=0, ascending=True)
+y_df['PCTL']=y_df['FRAC'].cumsum(skipna = True)
+w_df.sort_values('ASSET', axis=0, ascending=True)
+w_df['PCTL']=w_df['FRAC'].cumsum(skipna = True)
+
+x1=[20,30,40,50,60,70,80,90,100.1]
+
+for x_i in x1:
+  filter = (y_df['PCTL'] <= x_i) #creating filter for each x_i
+  temp_y_df=y_df[filter] #creating a df for y_df after applying for the filter 
+  y_pctls.append(temp_y_df['INCOME'].max()) #appending the last value of the income in each temp_
+ymin=y_df['INCOME'].min()
+y_pctls.insert(0,ymin-1)
+
+x=[10,20,30,40,50,60,70,80,90,100.1]
+index_list2 = []
+w_pctls = []
+for x_i in x:
+  index_list2.append(w_df.index[w_df['PCTL']<=x_i].max()) #creating a list that contain the index number of the largest pctl in each decile group 
+
+lists2 = w_df.iloc[index_list2] #creating a list that contain the records for all indexed pctl
+w_pctls=list(lists2.ASSET)
+wmin=w_df['ASSET'].min()
+w_pctls.insert(0,wmin-1)
+
+INCOME_PCTL =pd.cut(x=data_df['INCOME'],bins=y_pctls,labels=['1','2','3','4','5','6','7','8','9','10'])
+data_df.insert(len(data_df.columns),'INCOME_PCTL',INCOME_PCTL,allow_duplicates=True)
+data_df['ASSET_PCTL'] =pd.cut(x=data_df['ASSET'],bins=w_pctls,labels=['1','2','3','4','5','6','7','8','9','10'])
+
+# Find the average liquid asset holdings by income-asset decile group
+data_df['WGT_LIQ'] = data_df['WGT']*data_df['LIQ']
+income_asset_group1_df = data_df.groupby(['INCOME_PCTL','ASSET_PCTL']).sum()
+income_asset_group1_df=income_asset_group1_df.assign( AVG_LIQ = lambda x : (x['WGT_LIQ']/x['WGT'])) #divide the sums of the liquidty asset of each recrod by the total population in the group
+
+# Plotting the average liquid asset holdings by income-asset decile group
+fig,(ax1, ax2) = plt.subplots(1, 2, figsize=(15,12))
+income_asset_group1_df = income_asset_group1_df.reset_index()
+income_asset_group1_df['INCOME_PCTL'].astype(int)
+for i in range(1,11):
+  temp = income_asset_group1_df[income_asset_group1_df['INCOME_PCTL']==str(i)]
+  ax1.plot(np.array(temp['ASSET_PCTL']),np.array(temp['AVG_LIQ']), label = str(i))
+  ax1.title.set_text('Relationship of Asset Decile and (Weighted) Avgerage Liquidity')
+
+income_asset_group1_df['ASSET_PCTL'].astype(int)
+for i in range(1,11):
+  temp = income_asset_group1_df[income_asset_group1_df['ASSET_PCTL']==str(i)]
+  ax2.plot(np.array(temp['INCOME_PCTL']),np.array(temp['AVG_LIQ']), label = str(i)) 
+  ax2.title.set_text('Relationship of Income Decile and (Weighted) Avgerage Liquidity')
+
+ax1.legend()
+ax2.legend()
+ax1.set_xlabel('ASSET_PCTL')
+ax2.set_xlabel('INCOME_PCTL')
+ax1.set_ylabel('AVG_LIQ')
+plt.show()
+
+# Find liquid asset as a share of total wealth by income-asset decile group
+# Calculating the share of assets for each record, 'LIQ' times 'WGT' to incorporate the weight that is represented by each record 
+data_df['Sum_Share_of_ASSET'] = ((data_df['LIQ']/data_df['ASSET']))*data_df['WGT']*100
+
+#Taking the sum of all weighted shares of liquid asset and divided by the total weights 
+income_asset_group2_df = data_df.groupby(['INCOME_PCTL','ASSET_PCTL']).sum().assign( AVG_Share_ASSET = lambda x : (x['Sum_Share_of_ASSET']/x['WGT']))
+
+# Plotting the share of liquid asset by income-asset decile group
+fig,(ax1, ax2) = plt.subplots(1, 2, figsize=(15,12))
+income_asset_group2_df = income_asset_group2_df.reset_index()
+income_asset_group2_df['INCOME_PCTL'].astype(int)
+for i in range(1,11):
+  temp = income_asset_group2_df[income_asset_group2_df['INCOME_PCTL']==str(i)]
+  ax1.plot(np.array(temp['ASSET_PCTL']),np.array(temp['AVG_Share_ASSET']), label = str(i))
+  ax1.title.set_text('Relationship of Asset Decile and Avgerage Share of Liquid Asset')
+
+income_asset_group2_df['ASSET_PCTL'].astype(int)
+for i in range(1,11):
+  temp = income_asset_group2_df[income_asset_group2_df['ASSET_PCTL']==str(i)]
+  ax2.plot(np.array(temp['INCOME_PCTL']),np.array(temp['AVG_Share_ASSET']), label = str(i)) 
+  ax2.title.set_text('Relationship of Income Decile and Avgerage Share of Liquid Asset')
+
+ax1.legend()
+ax2.legend()
+ax1.set_xlabel('ASSET_PCTL')
+ax2.set_xlabel('INCOME_PCTL')
+ax1.set_ylabel('AVG_Share_Liquid ASSET')
+plt.show()
