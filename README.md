@@ -9,6 +9,7 @@
   - [1. What is the relationship between real and nominal GDP](#1-what-is-the-relationship-between-real-and-nominal-gdp)
   - [2. Effect of the COVID-19 Pandemic on Inflation](#2-effect-of-the-covid-19-pandemic-on-inflation)
   - [3. Inflation and Money Growth](#3-inflation-and-money-growth)
+  - [4. Examine Portfolio Choice Theory](#4-examine-portfolio-choice-theory)
   
 ### Tool
 - Python
@@ -22,12 +23,14 @@ This EDA explores some key economic concepts and phenomenons using real-life dat
 - What is the relationship between real and nominal GDP?
 - What was the effect of the COVID-19 Pandemic on inflation?
 - Does printing money leads to larger inflation? ("Inflation is always and everywhere a monetary phenomenon." (Milton Friedman, 1970))
+- Does consumer data support Portfolio Choice Theory?
 
 ### Data Sources
-This analysis will be using monthly data publicly available at [FRED](https://fred.stlouisfed.org). All data used is available in the [Raw Data folder](https://github.com/kshao19/Money_and_Banking_Analysis/tree/main/Raw%20Data/) in this repository but is last downloaded in 2021. 
+This analysis will be using monthly data publicly available at [FRED](https://fred.stlouisfed.org) and [Survey of Consumer Finance (SCF)](https://www.federalreserve.gov/econres/scfindex.htm). All data used is available in the [Raw Data folder](https://github.com/kshao19/Money_and_Banking_Analysis/tree/main/Raw%20Data/) in this repository but is last downloaded in 2021. 
 - [Real and Nominal GDP](https://github.com/kshao19/Money_and_Banking_Analysis/blob/main/Raw%20Data/Nominal_Real%20GDP.csv)
 - [CPI, PPI, PCE](https://github.com/kshao19/Money_and_Banking_Analysis/blob/main/Raw%20Data/part2.csv)
 - [Money Supply M1, Money Supply M2](https://github.com/kshao19/Money_and_Banking_Analysis/blob/main/Raw%20Data/Money%20Stock.csv)
+- [2019 SCF](https://github.com/kshao19/Money_and_Banking_Analysis/blob/main/Raw%20Data/sub-data.zip)
 
 ### Results and Findings
 #### 1. What is the Relationship between Real and Nominal GDP
@@ -63,6 +66,7 @@ During the COVID 19, due to decreasing consumer demand and physical limitations 
 Milton Friedman once wrote that "Inflation is always and everywhere a monetary phenomenon."  This analysis seeks to compare inflation (as measured by CPI) and growth rate in M1 and M2 money supply. M1 money supply consists of physical currency and coin, demand deposits, traveler's checks, and other checkable deposits. M2 money supply consists of all components of M1 plus several less-liquid assets such as savings deposit. 
 
 The chart plots the year-to-yeare inflation and money growth from 1960 to 2020. Inflation is calculated using the same methodology as #2. Money growth is calculated as $100*\frac{M_{t} - M_{t-1}}{M_{t-1}}$.
+
 ![image](https://github.com/user-attachments/assets/4b2538f4-0b8f-4c3f-b693-4f88b9911a3a)
 ![image](https://github.com/user-attachments/assets/d32f427d-cbba-4557-a6a4-8f723c515575)
 ![image](https://github.com/user-attachments/assets/76507d51-45ce-458c-a709-64e1cec3deb5)
@@ -72,6 +76,26 @@ The chart plots the year-to-yeare inflation and money growth from 1960 to 2020. 
 - From 1991-2009, changes in the inflation appears to lag the changes in M1 and M2. From 2010 - 2020, inflation is moving in the same direction as M1 and M2.
 
 From the plotting, it is difficult to conclude whether inflation will always follow money growth.
+
+#### 4. Examine Portfolio Choice Theory
+
+This analysis uses the 2019 result of Survey of Consumer Finance (SCF) which records data on U.S. household balance sheets, pensions, income, and demographic characteristics. 
+
+Portfolio Choice Theory assumes that as wealth increases, investors have more resources to purchase assets, therefore, their demand for money increases. In addition, the more income household have, Portfolio Choice Theory assumes that their ability to hold a variaty of assets increases, including their ability to hold money, given a cateris paribus assumption to accumulate wealth. The left chart shows the relationship between asset and avergae liquid holding by income decile groups. The right chart shows the relationship between income and avergae liquid holding by asset decile groups.
+
+- For any income level, the more asset a household has, the more liquid asset it will hold, which supports the Portfolio Choice Theory. 
+- Generally, for any wealth level, the more income they have, their liquid asset holding increases. This is consistent with the prediction of Portfolio Choice Theory.
+  - However, for people who have the most wealth, i.e. those in the 9th-10th asset decile groups, although the overall trend increases, those people who have the medium level of income actually have the lowest amount of liquid asset holding.
+  
+![image](https://github.com/user-attachments/assets/d842a45c-1a27-4876-b0c9-beb3e22c52b7)
+
+Portfolio Choice Theory assumes that people choose a variety of assets according to their relative return, risks, liquidity, as well as people's own wealth and income. The left plot shows the relationship between asset and share of liquid holding by income decile groups. The right chart shows the relationship between income and share of liquid holding by asset decile groups. 
+- Increasing asset is correlated to decreasing trend in the share of liquid asset, which supports the Portfolio Choice Theory. It shows that as people have more wealth, they are less likely to put all the asset into cash. They will care more about the relative expected return and the risks of the asset than the relative liquidity of the asset. Although liquid asset is easier to be cashed out, it does not generate more return as other assets such as bonds, equities, or goods or services like a car.
+-  For people who has lower wealth and lower income, liquidity matters more. As those people get more income, they would still want to hold cash so that they can use it, and they are more likely to use it at any time. But for people who has a higher wealth, as they have more income, they might only want to hold a certain level of cash and use the increasing income to invest in other assets because they already have a high wealth.
+
+![image](https://github.com/user-attachments/assets/c665369e-16e3-4f00-a21c-30bfdd7d73ac)
+
+
 
 
 
