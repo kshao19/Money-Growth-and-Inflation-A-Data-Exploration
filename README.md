@@ -1,5 +1,5 @@
-# Money and Banking Analysis
-## This is a project that proves and visualizes macroeconomic theories for Money &amp; Banking
+# Money Growth and Inflation: A Data Exploration
+## This is an analysis that proves and visualizes macroeconomic theories for Money &amp; Banking
 
 ## Table of Contents
 - [Tool](#tool)
