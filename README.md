@@ -1,5 +1,5 @@
 # Money Growth and Inflation: A Data Exploration
-## This is an analysis that proves and visualizes macroeconomic theories for Money &amp; Banking
+## This mini project explores key relationships in money, banking, and macroeconomics using publicly available data. All analysis is conducted in Python.  
 
 ## Table of Contents
 - [Tool](#tool)
@@ -19,12 +19,12 @@
 
 ### Exploratory Data Analysis
 
-This EDA explores some key economic concepts and phenomenons using real-life data, including:
-- What is the relationship between real and nominal GDP?
-- What was the effect of the COVID-19 Pandemic on inflation?
-- Does printing money leads to larger inflation? ("Inflation is always and everywhere a monetary phenomenon." (Milton Friedman, 1970))
-- Does consumer data support Portfolio Choice Theory?
-
+This project examines some key economic questions using real-life data, including:
+- How closely do real and nominal GDP move together over time?
+- How did the COVID-19 pandemic influence inflation dynamics in the U.S.?
+- Is there empirical evidence that money supply growth drives inflation, as suggested by Milton Friedman’s famous claim (1970)?
+- Do patterns in household financial data align with the predictions of Portfolio Choice Theory?
+- 
 ### Data Sources
 This analysis will be using monthly data publicly available at [FRED](https://fred.stlouisfed.org) and [Survey of Consumer Finance (SCF)](https://www.federalreserve.gov/econres/scfindex.htm). All data used is available in the [Raw Data folder](https://github.com/kshao19/Money_and_Banking_Analysis/tree/main/Raw%20Data/) in this repository but is last downloaded in 2021. 
 - [Real and Nominal GDP](https://github.com/kshao19/Money_and_Banking_Analysis/blob/main/Raw%20Data/Nominal_Real%20GDP.csv)
@@ -33,7 +33,7 @@ This analysis will be using monthly data publicly available at [FRED](https://fr
 - [2019 SCF](https://github.com/kshao19/Money_and_Banking_Analysis/blob/main/Raw%20Data/sub-data.zip)
 
 ### Results and Findings
-#### 1. What is the Relationship between Real and Nominal GDP
+#### 1. How closely do real and nominal GDP move together over time?
 
 This analysis seeks to understand the similarities and differences between the real and nominal GDP growth rate. In addition, this analysis seeks to calculate the GDP deflator and understand whether it is a measure of inflation. 
 Code to reproduce the analysis is available [here](https://github.com/kshao19/Money_and_Banking_Analysis/blob/main/Code/GDP).
@@ -46,7 +46,7 @@ The chart plots the year-to-year nominal GDP growth rate along with the real GDP
 
 GDP Deflator is a measure of the relative difference between the real and nominal GDP. It is a measure of the aggregate price level, showing the level of prices of all final goods and services in an economy at a point of time. Therefore, the change of GDP deflator through time is a measure of inflation, which is used to show the the growth rate of the aggregated price level within a period of time.
 
-#### 2. Effect of the COVID-19 Pandemic on Inflation
+#### 2. How did the COVID-19 pandemic influence inflation dynamics in the U.S.?
 
 This analysis calculates year-to-year inflations using 3 indicators of price level: PPI (Producer Price Index), CPI (Consumer Price Index), PCE (Personal Consumption Expenditures). 
 Code to reproduce the analysis is available [here](https://github.com/kshao19/Money_and_Banking_Analysis/blob/main/Code/GDP).
@@ -61,7 +61,7 @@ During the COVID 19, due to decreasing consumer demand and physical limitations 
 - Similarly, PPI measures the average movement in the costs of a fixed quantity of domestic production.
 - PCE takes into account the total value of personal consumption expenditures every month. In the mid of COVID and facing uncertainty and health concerns, consumers might be reluctant to purchase a lot of non-essential goods and services. Thus the quantity reduction will be reflected in the growth rate of PCE.
 
-#### 3. Inflation and Money Growth
+#### 3. Is there empirical evidence that money supply growth drives inflation, as suggested by Milton Friedman’s famous claim?
 
 Milton Friedman once wrote that "Inflation is always and everywhere a monetary phenomenon."  This analysis seeks to compare inflation (as measured by CPI) and growth rate in M1 and M2 money supply. M1 money supply consists of physical currency and coin, demand deposits, traveler's checks, and other checkable deposits. M2 money supply consists of all components of M1 plus several less-liquid assets such as savings deposit. Code to reproduce the analysis is available [here](https://github.com/kshao19/Money_and_Banking_Analysis/blob/main/Code/Money%20Growth).
 
@@ -77,7 +77,7 @@ The chart plots the year-to-yeare inflation and money growth from 1960 to 2020. 
 
 From the plotting, it is difficult to conclude whether inflation will always follow money growth.
 
-#### 4. Examine Portfolio Choice Theory
+#### 4. Do patterns in household financial data align with the predictions of Portfolio Choice Theory?
 
 This analysis uses the 2019 result of Survey of Consumer Finance (SCF) which records data on U.S. household balance sheets, pensions, income, and demographic characteristics. Code to reproduce the analysis is available [here](https://github.com/kshao19/Money_and_Banking_Analysis/blob/main/Code/Portfolio%20Choice%20Theory).
 
